@@ -1,0 +1,4 @@
+/Users/admin/code/Lesson_C/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/admin/code/Lesson_C/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/admin/code/Lesson_C/cmake-build-debug/CMakeFiles/L1_jianjie.dir
+/Users/admin/code/Lesson_C/cmake-build-debug/CMakeFiles/main.dir
