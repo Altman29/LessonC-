@@ -44,6 +44,10 @@ void stringMemberFunc();
 
 void stringMemberFunc2();
 
+void test();
+
+void testArray();
+
 int main() {
 //    function_in_out();
 //    const_cast_demo();
@@ -55,7 +59,9 @@ int main() {
 //    const_and_zhizhen_demo();
 //    getArraySize();
 //    stringOp();
-    stringMemberFunc2();
+//    stringMemberFunc2();
+
+    testArray();
     return 0;
 }
 
@@ -789,3 +795,50 @@ void stringMemberFunc2() {
  * 1)从/*开始到*\/结束
  * 2)从//直到行尾
  */
+
+/*
+ * 一下程序输出结果是6，请补全
+ */
+
+void test() {
+    const int x = 5, y = 6;
+    const int *p = &x;
+    //
+    p = &y;
+    //
+    cout << *p << endl;
+}
+
+/*
+ * 键盘录入一维字符串数组，在输入字符串前，先输入n值。要求数组需要动态申请空间，并在程序结束释放。
+ */
+void testArray() {
+    int n;
+    cout << "请输入字符串个数n: ";
+    cin >> n;
+
+    // 动态申请空间
+    char **strArr = new char *[n];
+    for (int i = 0; i < n; i++) {
+        strArr[i] = new char[100]; // 假设每个字符串最长为100
+    }
+
+    // 录入字符串
+    for (int i = 0; i < n; i++) {
+        cout << "请输入第" << i + 1 << "个字符串：";
+        cin >> strArr[i];
+    }
+
+    // 输出字符串
+    cout << "输入的字符串数组为：" << endl;
+    for (int i = 0; i < n; i++) {
+        cout << strArr[i] << endl;
+    }
+
+    // 释放动态申请的空间
+    for (int i = 0; i < n; i++) {
+        delete[] strArr[i];
+    }
+    delete[] strArr;
+
+}
