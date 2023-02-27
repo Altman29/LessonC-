@@ -36,6 +36,14 @@ void RefValueFuncTest();
 
 void const_and_zhizhen_demo();
 
+void getArraySize();
+
+void stringOp();
+
+void stringMemberFunc();
+
+void stringMemberFunc2();
+
 int main() {
 //    function_in_out();
 //    const_cast_demo();
@@ -44,7 +52,10 @@ int main() {
 //    ref_init_demo();
 //    SwapTest();
 //    RefValueFuncTest();
-    const_and_zhizhen_demo();
+//    const_and_zhizhen_demo();
+//    getArraySize();
+//    stringOp();
+    stringMemberFunc2();
     return 0;
 }
 
@@ -518,6 +529,263 @@ double biggerDouble(double x, double y) {
  * 所谓的函数重载，是指在程序的同一范围内声明几个功能类似的同名函数，例如，在一个类中声明3个求俩者中较大值的同名函数，
  * 使用同一个函数名作为功能一样的函数的函数名。示例如下：
  *
- * P46
+ */
+int bigger(int x, int y) {
+    if (x > y) return x;
+    else return y;
+}
+
+float bigger(float x, float y) {
+    if (x > y) return x;
+    else return y;
+}
+
+double bigger(double x, double y) {
+    if (x > y) return x;
+    else return y;
+}
+
+/*
+ * 有了函数的重载，在编写C++时，可以完成类似功能的不同函数统一命名，减少了命名空间的浪费；
+ * 函数名加上参数表称为函数的签名，也就是说，重载函数的签名是不同的；
+ * 实现函数的重载必须满足下列条件之一：
+ * 1)参数表中对应参数类型不同；
+ * 2)参数表中参数个数不同；
+ * 如果俩个函数仅仅返回值类型不同，那么不是重载，是重复定义会报错；
+ * 另外，采用引用参数也不能区分函数。
+ * void print(double);
+ * void print(double&); //错误，是重复定义
+ * 另外，调用时实参和形参类型不完全匹配，但存在赋值兼容情况，编译器会进行必要的类型提升；（int和double都可以自动转换为double类型）
+ *
+ * 需要注意的是，在有函数重载，当进行类型转换时，可能会出现多个函数都匹配的情况，也就是函数调用出现了二义性。此时编译器无法确定
+ * 哪一个才是真正需要调用的，所以会报错。因为将double取整或将整型提升为浮点型都是C++允许的。
+ *
+ * 在俩个函数同名，参数个数不同，但是参数多的那个函数有默认值的情况下，也会引发二义性：
+ * int sum(int a,int b,int c=0);
+ * int sum(int a,int b)
+ * 调用sum(1,2)同样会产生编译错误。
+ *
+ * 九、指针和动态内存分配
+ * 指针变量中保存的是一个地址，有时也称为指针指向一个地址。
+ * 若有以下定义
+ * int a = 100 , *p = &a;
+ * 则下列选项，表述错误的是()
+ * A.声明变量p，其中*表示p是一个指针变量；
+ * B.变量p经初始化，获得变量a的地址；
+ * C.变量p只可以指向一个整形变量；
+ * D.变量p的值是100；
+ * 分析，指针p执行整型变量a，p中保存a的地址，而不是值100，p指向的值是100。地址与地址中的值不要混淆。
+ *
+ * 数组的长度是声明数组是指定的，在整个程序运行过程中通常是不变的。C++语言不允许定义元素个数不确定的数组；
+ * int n;
+ * int a[n]; //在有些编译环境下，是不被允许的。
+ * 在程序设计中，通常会遇到根据待处理的数据量来确定数组的大小的情况。如果没有办法提前得知数据量的大小，往往会分配一个尽可能大的数组。
+ * 一方面，如果数据量并没有那么多，则可能会造成空间浪费；另一方面，如数据量超过了预估，则会造成数组容量不足；
+ *
+ * C++语言提供了一种"动态内存分配"机制，在程序运行期间，根据实际需要，临时分配一段内存空间用于存储数据。与声明数组时就需要
+ * 指定数组大小的内存分配方法不同，这种内存分配是在程序运行期间进行的，故称为"动态内存分配"。相对地，编译时确定数组空间大小
+ * 的方式称为"静态内存分配"。
+ *
+ * 在C++中，使用new运算符实现动态内存分配。例如：
+ * p = new T;
+ * 其中T是任意类型名，p是类型为T*的指针。这样的语句会动态分配出一片大小为sizeof(T)字节的内存空间，并且将该内存空间的起始地址
+ * 赋值给指针p。例如：
+ * int *p;
+ * p = new int;
+ * *p = 5;
+ * 第2行语句动态分配了有4个字节大小的内存空间，p指向这个空间的首地址，之后通过指针p可以读写该内存空间，第3行语句是向这个空间中
+ * 存入数组5；
+ *
+ * 使用new运算符还可以动态分配一个任意大小的数据：
+ * p = new T[N];
+ * 其中T是任意类型名，p是类型为T*的指针，N代表数组"元素个数"，可以是任何值为正整数的表达式。
+ * int *pArray;                 //指向数组的指针
+ * int i = 5;
+ * pArray = new int[i*20];      //分配了100个元素的整型数组
+ * pArray[0] = 20;              //数组第一个值
+ * pArray[99] = 30;             //数组最后一个值
+ * 数组下标从0开始，含n个元素的数组下标范围是0~n-1。超出这个范围会导致数组下标越界。
+ *
+ * 使用new运算符动态申请的内存空间，需要在使用完毕释放。C++提供了delete运算符，用来释放动态分配的内存空间：
+ * delete 指针;
+ * delete运算符后面的指针必须是指向动态分配内存的内存空间，否则运行时出错：
+ * int oneInt = 6;
+ * int *p = &oneInt;
+ * cout<<*p<<endl;
+ * delete p;            //出错，p是引用，不是动态分配的
+ * int *q = new int;
+ * *q = 8;
+ * cout<<*q<<endl;
+ * delete q;            //正确，q指向动态分配的空间
+ *
+ * 如果使用new运算符分配了一个数组，那么释放该数组时，语句如下：
+ * delete []指针;
+ * 如果用"delete 指针"来释放数组，虽然编译没问题，但实际上会导致动态内存分配的数组没有完全被释放。
+ *
+ * 使用new运算符分配的内存空间，一定要用delete运算符释放。否则，即使程序运行结束，这部分内存空间仍然不会被操作系统回收，
+ * 从而成为被白白浪费掉的内存垃圾，这种现象称为"内存泄露"。如果一直不停的进行动态内存分配，而不进行释放，会导致可用内存越来越小，
+ * 操作系统运行速度缓慢，严重时必须重启计算机才能恢复。
+ *
+ * 使用指针时，必须要严谨。当使用delete释放掉指针所指向的空间后，如果再通过指针访问这个空间，也得不到想要的结果。
+ *
+ *
+ * 十、用string对象处理字符串
+ * C++标准库提供了string数据类型，专门用来处理字符串。string是一个类，这个类型的变量称为"string对象"。一个string对象可以用来
+ * 保存一个具体的字符串。
+ *
+ * string对象与基本类型的变量有不同之处。例如，一个整数可以直接保存在一个整形变量中。而string对象所代表的字符串保存在内存中，
+ * 这段内存的首地址保存在string对象中。也就是说并不是字符串本身保存在string对象中。为了叙述方便，提到字符串对象时，通常不去区分字符串
+ * 本身或是保存字符串的地址，"字符串对象中的字符串"就是指"字符串对象所保存的地址中的字符串"。
+ *
+ * 不论字符串的长度如何，在同一种系统下，保存字符串的内存首地址都是一样长的，即一个string对象的大小是固定的。表达式sizeof(string)
+ * 代表string对象的大小，它的值可能随着编译器或操作系统的不同而不同。例如，sizeof(string)在32位的Dev C++中是4，64位Dev C++中是8。
+ *
+ * 要在程序中使用string对象，必须在程序头中包含头文件string，即在程序最前面要加上如下语句：
+ * #include <string>
+ * 使用string对象处理字符串时，要比使用字符数组的方法更简洁，不易出错。
+ *
+ * 1.声明一个string对象
+ * 与声明普通变量类似：
+ * string 变量名;
+ * 在声明string变量通同时，也可以进行初始化。即可以使用字符串常量初始化，也可以使用另一个字符串变量初始化。
+ * 没有初始化的字符串变量的值即是空串,即""。注意，字符串常量使用双引号括起来。例如：
+ * string str1;                 //声明string对象，值为空
+ * string city = "Beijing";     //声明string对象city，并使用字符串常量进行初始化
+ * string str2 = city;          //声明string对象str2，并使用字符串变量进行初始化
+ *
+ * //还可以使用字符数组进行初始化
+ * char name[]="C++"
+ * string str3 = name;
+ *
+ * 还可以声明一个strinig对象数组，即数组中每个元素都是字符串，例如：
+ * string citys[] = {"Beijing","Shanghai","Tianjin"};
+ * cout<<sizeof(citys)/sizeof(string)<<endl;        //输出数组元素个数
+ *
+ * 第二行输出数组元素个数。citys是string类型数组，siezeof(ciitys)是整个数组占用的空间大小，sizeof(string)是每个string对象的大小
+ * (随系统或编译器决定的固定值)，所以sizeof(citys)/sizeof(string)表示的数组元素的个数。
+ * 如下所示：
+ */
+#include <string>
+
+void getArraySize() {
+    string citys[] = {"beijing", "shanghai", "chongqing", "xuchang"};
+    cout << sizeof(citys) << endl;
+    cout << sizeof(string) << endl;
+    cout << sizeof(citys) / sizeof(string) << endl;
+}
+
+/*
+ * 2.string对象操作
+ * string对象可以比较大小，通过字典序进行的，而是大小写相关的。"Zbc"<"abc";小写ASCII码更大。
+ * 还可以用"+"进行连接。
+ * 如下所示：
  */
 
+void stringOp() {
+    string s1, s2;
+    s1 = "C++程序";
+    s2 = s1;
+    string s3;
+    cout << "s3 = " << s3 << endl;//输出 s3=
+    s3 = s1 + s2;
+    cout << s1 + s2 << endl;//输出C++程序 C++程序
+    cout << "s3 = " << s3 << endl;//输出 s3=C++程序C++程序
+    s3 += "de";
+    cout << "s3 = " << s3 << endl;//输出 $3=C4+程序C4+程序de
+
+    bool b = s1 < s3;//b为 true
+    cout << "bool = " << b << endl;//输出 bool = 1
+    char c = s1[2];//c 为4，下标从0开始计算
+    cout << "c = " << c << endl;//输出c=+
+    cout << s1[3] << endl;//输出+
+    char arrstr[] = "Hello";
+    s3 = s1 + arrstr;
+    cout << s3 << endl;// 输出C++程序 Hello
+}
+
+/*
+ * 3.string对象用法示例
+ * string类提供了一些成员函数，可以用来方便的实现一些功能，如查找子串等。这些成员函数的调用方法是"string对象名.成员函数名(参数)"；
+ * 成员函数是这个类提供的一些方法；
+ * const char *c_str() const;                       返回一个指向字符串的指，字符串内容与string串相同，用于将string转换为const char *
+ * int size() const;                                返回当前字符串大小
+ * int length() const;                              返回当前字符长度
+ * bool empty() const;                              判断当前字符串是否为空
+ * size_type find(const char *str,size_type index); 返回str在字符串中第一次出现的位置，从index开始查找，如果没有返回-1
+ * size_type find(char ch, size_type index);        返回ch字符在字符串中第一次出现的位置，从index开始查找，如果没有返回-1
+ * string &insert(int p, const string &s);          在p位置插入字符串s
+ * string &append(const char *s);                   将字符串s连接到当前字符串结尾处
+ * string substr(int pos=0, int n=npos) const;      返回从pos开始的n个字符组成的字符串
+ *
+ * 如下所示：
+ */
+
+void stringMemberFunc() {
+    string str;                 //未初始化，空串
+    if (str.empty()) cout << "str is NULL." << "length() = " << str.length() << endl;
+    else cout << "str is not NULL." << endl;
+
+    str.append("abcdefg");
+    cout << "str is " << str << ", size() = " << str.size() << endl;
+
+    const char *p = str.c_str();
+    cout << "p = " << p << endl;
+
+
+    cout << "find: " << str.find("de", 0) << endl;      //查找成功，3
+    cout << "find: " << str.find("de", 4) << endl;      //查找失败
+
+    string str1 = str.insert(4, "1234");
+    cout << str1 << endl;
+}
+
+/*
+ * 程序说明：字符串str在赋值前是空串，空串长度为0。函数c_str()将字符串str转换为const char *，赋值给指针p。
+ * find()函数是重载函数，含多个参数形式。
+ *
+ */
+void stringMemberFunc2() {
+    string s1 = "C++";
+    string s2 = "程序设计";
+    string s3 = s1 + s2;
+    string s4;
+    s4 = s1.append(s2);
+    if (s3 == s4) cout << "结果相同" << endl;
+    else cout << "结果不同" << endl;
+    int size = s1.size();
+    int length = s1.length();
+    cout << "size = " << size << "\t,length = " << length << endl;
+    s1[0] = 'J';
+    cout << "s1 = " << s1 << endl;
+    string s5 = s1.substr(3, 4);
+    cout << "s5 = " << s5 << endl;
+    char str[20];
+    strcpy(str, s5.c_str());
+    cout << "str = " << str << endl;
+    cout << "s1 = " << s1 << ", s2 = " << s2 << endl;
+    s1.swap(s2);
+    cout << "s1 = " << s1 << ", s2 = " << s2 << endl;
+    cout << "str = " << str << endl;
+    cout << "s2 = " << s2 << endl;
+    cout << s2.find(str) << endl;
+}
+
+/*
+ * 程序说明：用到strcpy()函数，它包含在头文件cstring中，所以程序中要使用#include <cstring>。连接俩个字符串即可以通过运算符"+"实现，
+ * 也可以使用函数append()实现。函数s1.size()与s1.length()都是返回字符串s1的长度，注意，每个汉字的长度为2。
+ * s1.substr(3,4)返回字符串s1中从下标3开始、长度为4的子串。函数的第一个参数表示起始未知下标，第二个参数表示子串的长度。
+ * 如果从起始位置开始，字符串中剩余子串长度小于第二个参数值，则返回一直到到原串尾的子串。
+ * strcpy(str,s5.c_str())将s5的内容赋值到str中。
+ *
+ * Section 3 C++语言的程序结构
+ *
+ * C++程序以.cpp作为文件扩展名，文件中包含若干类，和若干个函数。程序中必须有且仅有一个主函数main()，这是程序执行总入口。
+ * 主函数也称为主程序。程序从主程序开始处执行，按照其控制流程，一直执行到结束。
+ * 程序结束一般遇到以下俩种情况之一：
+ * 1)在主函数中遇到return语句；
+ * 2)执行到主函数最后的括号}；
+ * 主函数中可以调用程序中定义的其他函数，但其他函数不能调用主函数。主函数仅是系统为执行程序时所有调用的。
+ * C++程序中，仍沿用C语言的注释风格：
+ * 1)从/*开始到*\/结束
+ * 2)从//直到行尾
+ */
