@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/edy/code/LessonC-/cmake-build-debug"
+			"value" : "/Users/admin/code/LessonC-/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -515,7 +515,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/edy/code/LessonC-"
+			"value" : "/Users/admin/code/LessonC-"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -1087,7 +1087,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/edy/code/LessonC-/cmake-build-debug"
+			"value" : "/Users/admin/code/LessonC-/cmake-build-debug"
 		},
 		{
 			"name" : "Lesson_C_IS_TOP_LEVEL",
@@ -1111,7 +1111,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/edy/code/LessonC-"
+			"value" : "/Users/admin/code/LessonC-"
 		}
 	],
 	"kind" : "cache",
