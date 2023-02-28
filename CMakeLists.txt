@@ -5,5 +5,11 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(main main.cpp)
 add_executable(L1_jianjie L1_简介.cpp)
-
 add_executable(L2_object L2_面相对象.cpp)
+add_executable(L3_obj_high L3_类和对象进阶.cpp)
+add_executable(L4_operator L4_运算符重载.cpp)
+add_executable(L5_obj_more L5_obj_继承与派生.cpp)
+add_executable(L6_duotai_xuhanshu L6_多态与虚函数.cpp)
+add_executable(L7_in_out L7_输入输出流.cpp)
+add_executable(L8_file L8_文件操作.cpp)
+add_executable(L9_template L9_函数模板与类模板.cpp)
