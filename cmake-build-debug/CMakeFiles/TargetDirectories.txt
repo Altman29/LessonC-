@@ -6,6 +6,7 @@
 /Users/edy/code/LessonC-/cmake-build-debug/CMakeFiles/L7_in_out.dir
 /Users/edy/code/LessonC-/cmake-build-debug/CMakeFiles/L6_duotai_xuhanshu.dir
 /Users/edy/code/LessonC-/cmake-build-debug/CMakeFiles/L5_obj_more.dir
+/Users/edy/code/LessonC-/cmake-build-debug/CMakeFiles/_array.dir
 /Users/edy/code/LessonC-/cmake-build-debug/CMakeFiles/main.dir
 /Users/edy/code/LessonC-/cmake-build-debug/CMakeFiles/L4_operator.dir
 /Users/edy/code/LessonC-/cmake-build-debug/CMakeFiles/L1_jianjie.dir
