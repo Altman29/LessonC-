@@ -1,6 +1,7 @@
 /Users/admin/code/LessonC-/cmake-build-debug/CMakeFiles/edit_cache.dir
 /Users/admin/code/LessonC-/cmake-build-debug/CMakeFiles/L2_object.dir
 /Users/admin/code/LessonC-/cmake-build-debug/CMakeFiles/L9_template.dir
+/Users/admin/code/LessonC-/cmake-build-debug/CMakeFiles/test1.dir
 /Users/admin/code/LessonC-/cmake-build-debug/CMakeFiles/L8_file.dir
 /Users/admin/code/LessonC-/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 /Users/admin/code/LessonC-/cmake-build-debug/CMakeFiles/L7_in_out.dir

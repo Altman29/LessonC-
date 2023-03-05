@@ -114,6 +114,37 @@ build L9_template: CXX_EXECUTABLE_LINKER__L9_template_Debug CMakeFiles/L9_templa
   TARGET_PDB = L9_template.dbg
 
 # =============================================================================
+# Object build statements for EXECUTABLE target test1
+
+
+#############################################
+# Order-only phony target for test1
+
+build cmake_object_order_depends_target_test1: phony || CMakeFiles/test1.dir
+
+build CMakeFiles/test1.dir/L1_简介/test.cpp.o: CXX_COMPILER__test1_Debug /Users/admin/code/LessonC-/L1_简介/test.cpp || cmake_object_order_depends_target_test1
+  DEP_FILE = CMakeFiles/test1.dir/L1_简介/test.cpp.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -std=gnu++14
+  OBJECT_DIR = CMakeFiles/test1.dir
+  OBJECT_FILE_DIR = CMakeFiles/test1.dir/L1_简介
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test1
+
+
+#############################################
+# Link the executable test1
+
+build test1: CXX_EXECUTABLE_LINKER__test1_Debug CMakeFiles/test1.dir/L1_简介/test.cpp.o
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk
+  OBJECT_DIR = CMakeFiles/test1.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test1
+  TARGET_PDB = test1.dbg
+
+# =============================================================================
 # Object build statements for EXECUTABLE target L8_file
 
 
@@ -415,7 +446,7 @@ build L3_obj_high: CXX_EXECUTABLE_LINKER__L3_obj_high_Debug CMakeFiles/L3_obj_hi
 #############################################
 # Folder: /Users/admin/code/LessonC-/cmake-build-debug
 
-build all: phony L2_object L9_template L8_file L7_in_out L6_duotai_xuhanshu L5_obj_more _array main L4_operator L1_jianjie L3_obj_high
+build all: phony L2_object L9_template test1 L8_file L7_in_out L6_duotai_xuhanshu L5_obj_more _array main L4_operator L1_jianjie L3_obj_high
 
 # =============================================================================
 # Built-in targets

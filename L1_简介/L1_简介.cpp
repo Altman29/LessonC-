@@ -48,6 +48,18 @@ void test();
 
 void testArray();
 
+void fun5(double);
+
+void fun5(double) {
+    cout << "fun5 run.";
+}
+
+void fun7(int *);
+
+void fun7(int *a) {
+
+}
+
 int main() {
 //    function_in_out();
 //    const_cast_demo();
@@ -61,7 +73,14 @@ int main() {
 //    stringOp();
 //    stringMemberFunc2();
 
-    testArray();
+//    testArray();
+
+//    cout << 3.14<<"";
+
+    const int x = 5, y = 6;
+    const int *p = &x;
+    p=&y;
+    cout << *p << endl;
     return 0;
 }
 
