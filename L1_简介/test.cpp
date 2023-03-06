@@ -21,12 +21,29 @@ public:
 
 class X {
     int a;
+
     void fun1();
 
 public:
     void fun2();
 };
 
+
+class A {
+public:
+    int a, b;
+
+    A(int aa, int bb) {
+        a = aa--;
+        b = a * bb;
+        cout<<"构造函数"<<endl;
+
+    }
+    ~A(){
+        cout<<"析构函数"<<endl;
+    }
+
+};
 
 
 //设计题1
@@ -47,5 +64,7 @@ int main() {
 
     X objX;
 
+    A a1(4, 5);
+    cout << "a= " << a1.a << ", b=" << a1.b << endl;
     return 0;
 }
