@@ -52,6 +52,37 @@ build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
 build edit_cache: phony CMakeFiles/edit_cache.util
 
 # =============================================================================
+# Object build statements for EXECUTABLE target test3
+
+
+#############################################
+# Order-only phony target for test3
+
+build cmake_object_order_depends_target_test3: phony || CMakeFiles/test3.dir
+
+build CMakeFiles/test3.dir/L3_类和对象/test.cpp.o: CXX_COMPILER__test3_Debug /Users/admin/code/LessonC-/L3_类和对象/test.cpp || cmake_object_order_depends_target_test3
+  DEP_FILE = CMakeFiles/test3.dir/L3_类和对象/test.cpp.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -std=gnu++14
+  OBJECT_DIR = CMakeFiles/test3.dir
+  OBJECT_FILE_DIR = CMakeFiles/test3.dir/L3_类和对象
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test3
+
+
+#############################################
+# Link the executable test3
+
+build test3: CXX_EXECUTABLE_LINKER__test3_Debug CMakeFiles/test3.dir/L3_类和对象/test.cpp.o
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk
+  OBJECT_DIR = CMakeFiles/test3.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test3
+  TARGET_PDB = test3.dbg
+
+# =============================================================================
 # Object build statements for EXECUTABLE target L2_object
 
 
@@ -446,7 +477,7 @@ build L3_obj_high: CXX_EXECUTABLE_LINKER__L3_obj_high_Debug CMakeFiles/L3_obj_hi
 #############################################
 # Folder: /Users/admin/code/LessonC-/cmake-build-debug
 
-build all: phony L2_object L9_template test1 L8_file L7_in_out L6_duotai_xuhanshu L5_obj_more _array main L4_operator L1_jianjie L3_obj_high
+build all: phony test3 L2_object L9_template test1 L8_file L7_in_out L6_duotai_xuhanshu L5_obj_more _array main L4_operator L1_jianjie L3_obj_high
 
 # =============================================================================
 # Built-in targets
